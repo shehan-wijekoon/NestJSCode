@@ -2,10 +2,12 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from 'generated/prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
+import 'dotenv/config';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor() {
+    console.log('Database URL check:', process.env.DATABASE_URL);
     const pool = new Pool({ 
       connectionString: process.env.DATABASE_URL 
     });
